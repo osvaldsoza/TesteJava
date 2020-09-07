@@ -1,49 +1,43 @@
+import java.util.Comparator;
+import java.util.stream.IntStream;
+
 public class Teste {
 
     public static void main(String[] args) {
 
         int[] numbers = new int[]{2, 8, 4, -3, 7};
-        int aux = 0;
+        int sizeNumbers = numbers.length - 1;
 
-        orderAsc(numbers);
-        orderDesc(numbers);
+        int minSum = minSumOrderAsc(numbers, sizeNumbers);
+        int maxSum = maxSumOrderDesc(numbers, sizeNumbers);
+
+        System.out.println(minSum);
+        System.out.println(maxSum);
     }
 
-    private static void orderAsc(int[] numbers) {
-        int aux;
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-
-                if (numbers[i] > numbers[j]) {
-                    aux = numbers[i];
-                    numbers[i] = numbers[j];
-                    numbers[j] = aux;
-                }
-            }
-        }
+    private static int minSumOrderAsc(int[] numbers, int sizeNumbers) {
+        int[] numbersOrderAsc = getNumbersOrder(numbers, Comparator.naturalOrder());
         int sumAsc = 0;
-        for (int i = 0; i < numbers.length - 1; i++) {
-            sumAsc += numbers[i];
-        }
-        System.out.println(sumAsc);
+        return sumNumbersOrder(numbersOrderAsc, sumAsc, sizeNumbers);
     }
 
-    private static void orderDesc(int[] numbers) {
-        int aux;
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-
-                if (numbers[i] < numbers[j]) {
-                    aux = numbers[i];
-                    numbers[i] = numbers[j];
-                    numbers[j] = aux;
-                }
-            }
-        }
+    private static int maxSumOrderDesc(int[] numbers, int sizeNumbers) {
+        int[] numbersOrderDesc = getNumbersOrder(numbers, Comparator.reverseOrder());
         int sumDesc = 0;
-        for (int i = 0; i < numbers.length - 1; i++) {
-            sumDesc += numbers[i];
+        return sumNumbersOrder(numbersOrderDesc, sumDesc, sizeNumbers);
+    }
+
+    private static int sumNumbersOrder(int[] numbersOrderAsc, int sum, int i2) {
+        for (int i = 0; i < i2; i++) {
+            sum += numbersOrderAsc[i];
         }
-        System.out.println(sumDesc);
+        return sum;
+    }
+
+    private static int[] getNumbersOrder(int[] numbers, Comparator<Integer> comparator) {
+        return IntStream.of(numbers).boxed()
+                .sorted(comparator)
+                .mapToInt(i -> i)
+                .toArray();
     }
 }
