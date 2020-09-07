@@ -6,10 +6,13 @@ public class Teste {
     public static void main(String[] args) {
 
         int[] numbers = new int[]{2, 8, 4, -3, 7};
+<<<<<<< HEAD
         int sizeNumbers = numbers.length - 1;
 
         int minSum = minSumOrderAsc(numbers, sizeNumbers);
         int maxSum = maxSumOrderDesc(numbers, sizeNumbers);
+=======
+>>>>>>> 2bd0669bb6871b6b8ad87e89b1142aae91ef1585
 
         System.out.println(minSum);
         System.out.println(maxSum);
