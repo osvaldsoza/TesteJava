@@ -3,7 +3,6 @@ public class Teste {
     public static void main(String[] args) {
 
         int[] numbers = new int[]{2, 8, 4, -3, 7};
-        int aux = 0;
 
         orderAsc(numbers);
         orderDesc(numbers);
